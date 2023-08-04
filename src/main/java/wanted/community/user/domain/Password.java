@@ -1,10 +1,12 @@
 package wanted.community.user.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 
 import java.util.Objects;
 
+@ToString
 @EqualsAndHashCode
 public class Password {
 

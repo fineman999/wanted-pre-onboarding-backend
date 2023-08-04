@@ -1,7 +1,9 @@
 package wanted.community.user.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
+@ToString
 @EqualsAndHashCode
 public class Email {
     private final String value;
