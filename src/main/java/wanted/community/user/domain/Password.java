@@ -1,9 +1,11 @@
 package wanted.community.user.domain;
 
+import lombok.EqualsAndHashCode;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 
 import java.util.Objects;
 
+@EqualsAndHashCode
 public class Password {
 
     private final String value;
@@ -23,16 +25,4 @@ public class Password {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Password password1 = (Password) o;
-        return Objects.equals(value, password1.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
-    }
 }
