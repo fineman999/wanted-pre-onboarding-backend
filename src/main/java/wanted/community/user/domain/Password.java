@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class Password {
 
-    private final String password;
+    private final String value;
 
-    public Password(String password) {
-        this.password = password;
+    public Password(String value) {
+        this.value = value;
     }
 
     public static Password create(String password, PasswordEncoderHolder passwordEncoder) {
@@ -28,11 +28,11 @@ public class Password {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Password password1 = (Password) o;
-        return Objects.equals(password, password1.password);
+        return Objects.equals(value, password1.value);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(password);
+        return Objects.hash(value);
     }
 }
