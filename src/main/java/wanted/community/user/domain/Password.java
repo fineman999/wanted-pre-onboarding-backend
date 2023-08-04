@@ -7,7 +7,14 @@ public class Password {
     private final String password;
 
     public Password(String password) {
+        checkLength(password);
         this.password = password;
+    }
+
+    private static void checkLength(String password) {
+        if (password == null || password.length() < 8) {
+            throw new IllegalArgumentException("비밀번호는 8자 이상이어야 합니다.");
+        }
     }
 
     public static Password create(String password) {
