@@ -1,6 +1,5 @@
 package wanted.community.user.application;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,10 +9,9 @@ import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;
 import wanted.community.user.domain.User;
 import wanted.community.user.mock.FakeUserRepository;
-import wanted.community.user.presentation.request.UserCreateRequest;
+import wanted.community.user.application.port.UserCreateDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceImplTest {
 
@@ -29,12 +27,12 @@ class UserServiceImplTest {
     @Test
     @DisplayName("유저를 생성합니다.")
     void create() {
-        UserCreateRequest userCreateRequest = UserCreateRequest.builder()
+        UserCreateDto userCreateDto = UserCreateDto.builder()
                 .email("test@test.com")
                 .password("123456789")
                 .build();
 
-        User user = userServiceImpl.create(userCreateRequest);
+        User user = userServiceImpl.create(userCreateDto);
 
         assertThat(user).isEqualTo(User.builder()
                 .id(1L)

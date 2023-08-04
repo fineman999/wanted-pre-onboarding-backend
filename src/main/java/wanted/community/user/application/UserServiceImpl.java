@@ -6,7 +6,7 @@ import wanted.community.user.application.port.PasswordEncoderHolder;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
 import wanted.community.user.presentation.port.UserService;
-import wanted.community.user.presentation.request.UserCreateRequest;
+import wanted.community.user.application.port.UserCreateDto;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User create(UserCreateRequest userCreateRequest) {
-        User user = User.create(userCreateRequest.getEmail(), userCreateRequest.getPassword(), passwordEncoderHolder);
+    public User create(UserCreateDto userCreateDto) {
+        User user = User.create(userCreateDto.email(), userCreateDto.password(), passwordEncoderHolder);
         user = userRepository.create(user);
         return user;
     }
