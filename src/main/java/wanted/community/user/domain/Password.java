@@ -1,5 +1,7 @@
 package wanted.community.user.domain;
 
+import wanted.community.user.application.port.PasswordEncoderHolder;
+
 import java.util.Objects;
 
 public class Password {
@@ -7,8 +9,12 @@ public class Password {
     private final String password;
 
     public Password(String password) {
-        checkLength(password);
         this.password = password;
+    }
+
+    public static Password create(String password, PasswordEncoderHolder passwordEncoder) {
+        checkLength(password);
+        return new Password(passwordEncoder.encode(password));
     }
 
     private static void checkLength(String password) {
@@ -16,11 +22,6 @@ public class Password {
             throw new IllegalArgumentException("비밀번호는 8자 이상이어야 합니다.");
         }
     }
-
-    public static Password create(String password) {
-        return new Password(password);
-    }
-
 
     @Override
     public boolean equals(Object o) {
