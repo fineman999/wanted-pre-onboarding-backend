@@ -8,6 +8,7 @@ import wanted.community.user.domain.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FakeUserRepository implements UserRepository {
@@ -28,5 +29,19 @@ public class FakeUserRepository implements UserRepository {
         data.removeIf(item -> Objects.equals(item.getId(), user.getId()));
         data.add(user);
         return user;
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return data.stream()
+                .filter(item -> Objects.equals(item.getEmail(), email))
+                .findFirst();
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("해당 이메일을 가진 유저가 없습니다.")
+        );
     }
 }

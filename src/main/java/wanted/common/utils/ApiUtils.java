@@ -1,4 +1,4 @@
-package wanted.utils;
+package wanted.common.utils;
 
 
 import org.apache.commons.lang3.builder.ToStringBuilder;

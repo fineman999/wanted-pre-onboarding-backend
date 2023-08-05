@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class UserCreateRequest {
-
+public class LoginRequest {
 
     @Email(message = "이메일 형식이 올바르지 않습니다.")
     private final String email;
@@ -17,7 +16,7 @@ public class UserCreateRequest {
     private final String password;
 
     @Builder
-    public UserCreateRequest(String email, String password) {
+    public LoginRequest(String email, String password) {
         this.email = email;
         this.password = password;
     }

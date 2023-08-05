@@ -4,11 +4,12 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import wanted.utils.ApiUtils;
-import wanted.utils.ApiUtils.ApiResult;
+import wanted.common.utils.ApiUtils;
+import wanted.common.utils.ApiUtils.ApiResult;
 
 @ControllerAdvice
 public class GeneralExceptionHandler {
@@ -37,6 +38,11 @@ public class GeneralExceptionHandler {
             );
         }
         return newResponse(e, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<?> handleBadCredentialsException(Exception e) {
+        return newResponse("이메일 혹은 비밀번호가 일치하지 않습니다. 다시 확인해주세요.", HttpStatus.UNAUTHORIZED);
     }
 
 }

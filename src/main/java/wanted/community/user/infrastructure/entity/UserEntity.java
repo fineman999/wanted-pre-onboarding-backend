@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;
+import wanted.community.user.domain.Role;
 import wanted.community.user.domain.User;
 
 @Getter
@@ -21,10 +22,14 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private Role role;
+
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
         userEntity.email = user.getEmail();
         userEntity.password = user.getPassword();
+        userEntity.role = user.getRole();
         return userEntity;
     }
 
@@ -33,6 +38,7 @@ public class UserEntity {
                 .id(id)
                 .email(Email.of(email))
                 .password(Password.of(password))
+                .role(role)
                 .build();
     }
 }
