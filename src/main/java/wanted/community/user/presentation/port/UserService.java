@@ -4,5 +4,5 @@ import wanted.community.user.domain.User;
 import wanted.community.user.application.port.UserCreateDto;
 
 public interface UserService {
-    User create(UserCreateDto userCreateDto);
+    User save(UserCreateDto userCreateDto);
 }

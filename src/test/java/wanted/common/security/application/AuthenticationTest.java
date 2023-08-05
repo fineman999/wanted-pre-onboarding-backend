@@ -35,7 +35,7 @@ class AuthenticationTest {
 
     @BeforeEach
     void setUp() {
-        User user = userService.create(UserCreateDto.builder()
+        User user = userService.save(UserCreateDto.builder()
                 .email("test@gmail.com")
                 .password("123456789")
                 .build());

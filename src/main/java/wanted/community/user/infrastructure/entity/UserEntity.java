@@ -16,7 +16,7 @@ public class UserEntity {
     private Long id;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -27,6 +27,7 @@ public class UserEntity {
 
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
+        userEntity.id = user.getId();
         userEntity.email = user.getEmail();
         userEntity.password = user.getPassword();
         userEntity.role = user.getRole();

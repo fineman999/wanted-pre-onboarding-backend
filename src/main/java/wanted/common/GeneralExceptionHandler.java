@@ -1,6 +1,7 @@
 package wanted.common;
 
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class GeneralExceptionHandler {
             IllegalStateException.class,
             ConstraintViolationException.class,
             MethodArgumentNotValidException.class,
+            DuplicateKeyException.class
     })
     public ResponseEntity<?> handleBadRequestException(Exception e) {
         if (e instanceof MethodArgumentNotValidException) {
@@ -44,5 +46,6 @@ public class GeneralExceptionHandler {
     public ResponseEntity<?> handleBadCredentialsException(Exception e) {
         return newResponse("이메일 혹은 비밀번호가 일치하지 않습니다. 다시 확인해주세요.", HttpStatus.UNAUTHORIZED);
     }
+
 
 }

@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.user.application.port.JwtGenerator;
@@ -32,5 +33,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
 
         throw new BadCredentialsException("사용자 인증정보가 일치하지 않습니다.");
+    }
+
+    @Override
+    public String getEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
