@@ -11,7 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.CommunityApplication;
-import wanted.community.user.application.AuthenticationImpl;
+import wanted.community.user.application.AuthenticationServiceImpl;
 import wanted.community.user.application.port.UserCreateDto;
 import wanted.community.user.domain.User;
 import wanted.community.user.presentation.port.UserService;
@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class AuthenticationTest {
 
     @Autowired
-    private AuthenticationImpl authentication;
+    private AuthenticationServiceImpl authentication;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -47,7 +47,7 @@ class AuthenticationTest {
     @DisplayName("사용자 이메일과 비밀번호로 인증 토큰을 생성하는 테스트")
     void authenticate() {
 
-        AuthenticationImpl testAuthentication = new AuthenticationImpl(
+        AuthenticationServiceImpl testAuthentication = new AuthenticationServiceImpl(
                 authenticationManager,
                 new FakeJwtGenerator("test")
         );

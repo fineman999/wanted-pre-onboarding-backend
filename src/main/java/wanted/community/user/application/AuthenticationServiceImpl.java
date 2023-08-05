@@ -15,7 +15,7 @@ import wanted.security.domain.CustomUserDetails;
 
 @Service
 @RequiredArgsConstructor
-public class AuthenticationImpl implements AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtGenerator jwtGenerator;
     @Transactional
