@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import wanted.community.user.domain.User;
 import wanted.community.user.presentation.port.UserService;
 import wanted.community.user.presentation.request.LoginRequest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Transactional
@@ -26,6 +28,9 @@ class AuthenticationTest {
     private AuthenticationImpl authentication;
 
     @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
     private UserService userService;
 
     @BeforeEach
@@ -34,19 +39,28 @@ class AuthenticationTest {
                 .email("test@gmail.com")
                 .password("123456789")
                 .build());
+
+
     }
 
     @Test
     @DisplayName("사용자 이메일과 비밀번호로 인증 토큰을 생성하는 테스트")
     void authenticate() {
+
+        AuthenticationImpl testAuthentication = new AuthenticationImpl(
+                authenticationManager,
+                new FakeJwtGenerator("test")
+        );
+
         LoginRequest loginRequest = LoginRequest.builder()
                 .email("test@gmail.com")
                 .password("123456789")
                 .build();
 
-        String token = authentication.authenticate(loginRequest);
+        String token = testAuthentication.authenticate(loginRequest);
 
-        System.out.println(token);
+
+        assertThat(token).isEqualTo("test");
 
     }
 

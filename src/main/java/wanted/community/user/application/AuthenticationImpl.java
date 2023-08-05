@@ -8,10 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import wanted.security.domain.CustomUserDetails;
-import wanted.security.jwt.JwtGenerator;
+import wanted.community.user.application.port.JwtGenerator;
 import wanted.community.user.presentation.AuthenticationService;
 import wanted.community.user.presentation.request.LoginRequest;
+import wanted.security.domain.CustomUserDetails;
 
 @Service
 @RequiredArgsConstructor
