@@ -21,8 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 class UserControllerTest {
 
-    private static MockHttpServletRequest request;
-
     @Autowired
     ObjectMapper objectMapper;
 

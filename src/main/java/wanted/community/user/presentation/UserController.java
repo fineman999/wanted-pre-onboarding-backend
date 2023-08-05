@@ -13,9 +13,9 @@ import wanted.community.user.domain.User;
 import wanted.community.user.presentation.port.UserService;
 import wanted.community.user.presentation.request.UserCreateRequest;
 import wanted.community.user.presentation.response.UserResponse;
-import wanted.utils.ApiUtils.ApiResult;
+import wanted.common.utils.ApiUtils.ApiResult;
 
-import static wanted.utils.ApiUtils.success;
+import static wanted.common.utils.ApiUtils.success;
 
 @RestController
 @RequestMapping("/api/v1/users")

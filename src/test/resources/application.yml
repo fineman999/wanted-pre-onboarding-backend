@@ -19,3 +19,8 @@ spring:
     properties:
         hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+security:
+  jwt:
+    secret-key: Lku1GIzGvgA9rlZVP+hK4CgHQigzdMsfenAW6C1dNq3ahgOvm2T+JiXjAZ8mPK2k
+    expiration-access: 300000
