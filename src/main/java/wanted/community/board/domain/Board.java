@@ -3,7 +3,6 @@ package wanted.community.board.domain;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 @EqualsAndHashCode
 public class Board {
@@ -22,10 +21,27 @@ public class Board {
 
 
     public static Board create(BoardCreateDto boardCreateDto, Long userId) {
+        checkValid(boardCreateDto);
         return Board.builder()
                 .title(boardCreateDto.getTitle())
                 .content(boardCreateDto.getContent())
                 .userId(userId)
                 .build();
+    }
+
+    private static void checkValid(BoardCreateDto boardCreateDto) {
+        checkValidTitle(boardCreateDto.getTitle());
+        checkValidContent(boardCreateDto.getContent());
+    }
+
+    private static void checkValidTitle(String title) {
+        if (title == null || title.isEmpty() || title.isBlank()) {
+            throw new IllegalArgumentException("제목이 비어있습니다.");
+        }
+    }
+    private static void checkValidContent(String content) {
+        if (content == null || content.isEmpty() || content.isBlank()) {
+            throw new IllegalArgumentException("내용이 비어있습니다.");
+        }
     }
 }
