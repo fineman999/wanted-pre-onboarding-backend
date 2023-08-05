@@ -4,9 +4,11 @@ package wanted.community.board.domain;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import wanted.community.user.domain.User;
 
 @Getter
+@ToString
 @EqualsAndHashCode
 public class Board {
     private final Long id;
@@ -47,5 +49,4 @@ public class Board {
             throw new IllegalArgumentException("내용이 비어있습니다.");
         }
     }
-
 }

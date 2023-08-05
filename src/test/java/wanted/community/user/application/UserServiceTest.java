@@ -13,7 +13,7 @@ import wanted.community.user.application.port.UserCreateDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class UserServiceImplTest {
+class UserServiceTest {
 
     private UserServiceImpl userServiceImpl;
     private PasswordEncoderHolder passwordEncoderHolder;
