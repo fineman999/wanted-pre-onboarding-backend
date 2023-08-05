@@ -32,7 +32,7 @@ class UserServiceTest {
                 .password("123456789")
                 .build();
 
-        User user = userServiceImpl.create(userCreateDto);
+        User user = userServiceImpl.save(userCreateDto);
 
         assertThat(user).isEqualTo(User.builder()
                 .id(1L)

@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public User create(UserCreateDto userCreateDto) {
+    public User save(UserCreateDto userCreateDto) {
         User user = User.create(userCreateDto.getEmail(), userCreateDto.getPassword(), passwordEncoderHolder);
         user = userRepository.save(user);
         return user;

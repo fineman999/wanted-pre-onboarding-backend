@@ -13,10 +13,13 @@ public class JwtConfig {
     private final String secret;
     private final Date expirationAccess;
 
+    private final String permitUrlByUser;
     public JwtConfig(
             @Value("${security.jwt.secret-key}") String secret,
-            @Value("${security.jwt.expiration-access}") String expirationAccess) {
+            @Value("${security.jwt.expiration-access}") String expirationAccess,
+            @Value("${security.permit-url}") String permitUrlByUser) {
         this.secret = secret;
         this.expirationAccess = new Date(System.currentTimeMillis() + Long.parseLong(expirationAccess));
+        this.permitUrlByUser = permitUrlByUser;
     }
 }

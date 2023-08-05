@@ -1,5 +1,6 @@
 package wanted.common.security.application;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import wanted.community.user.application.port.JwtGenerator;
 import wanted.security.domain.CustomUserDetails;
 
@@ -21,5 +22,15 @@ public class FakeJwtGenerator implements JwtGenerator {
     @Override
     public String generateToken(Map<String, Object> extraClaims, CustomUserDetails user) {
         return token;
+    }
+
+    @Override
+    public String extractUsername(String token) {
+        return null;
+    }
+
+    @Override
+    public boolean isTokenValid(String jwt, UserDetails userDetails) {
+        return false;
     }
 }

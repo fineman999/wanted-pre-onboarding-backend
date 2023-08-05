@@ -1,6 +1,5 @@
 package wanted.community.user.presentation;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
-import wanted.community.user.application.AuthenticationServiceImpl;
 import wanted.community.user.application.port.UserCreateDto;
-import wanted.community.user.domain.User;
 import wanted.community.user.presentation.port.UserService;
 import wanted.community.user.presentation.request.LoginRequest;
 
@@ -40,7 +36,7 @@ class LoginControllerTest {
 
     @BeforeEach
     void setUp() {
-        userService.create(UserCreateDto.builder()
+        userService.save(UserCreateDto.builder()
                 .email("test@gmail.com")
                 .password("123456789")
                 .build());

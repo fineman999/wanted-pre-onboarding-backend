@@ -24,9 +24,10 @@ public class BoardEntity {
 
     public static BoardEntity from(Board board) {
         BoardEntity boardEntity = new BoardEntity();
+        boardEntity.id = board.getId();
         boardEntity.title = board.getTitle();
         boardEntity.content = board.getContent();
-
+        boardEntity.writer = UserEntity.from(board.getWriter());
         return boardEntity;
     }
 

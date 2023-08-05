@@ -1,6 +1,5 @@
 package wanted.community.board.application;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import wanted.community.user.domain.Role;
 import wanted.community.user.domain.User;
 import wanted.community.user.mock.FakeUserRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class BoardServiceTest {
 
@@ -43,11 +42,11 @@ class BoardServiceTest {
 
         Board board = boardService.save(boardCreateDto, "test@test.com");
 
-        Assertions.assertThat(board).isEqualTo(Board.builder()
+        assertThat(board).isEqualTo(Board.builder()
                 .id(1L)
                 .title("test")
                 .content("test")
-                        .writer(writer)
+                .writer(writer)
                 .build());
 
     }
