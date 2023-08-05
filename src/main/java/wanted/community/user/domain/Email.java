@@ -1,8 +1,10 @@
 package wanted.community.user.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @ToString
 @EqualsAndHashCode
 public class Email {
@@ -24,5 +26,7 @@ public class Email {
         }
     }
 
-
+    public static Email of(String email) {
+        return new Email(email);
+    }
 }

@@ -1,11 +1,13 @@
 package wanted.community.user.domain;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 
 import java.util.Objects;
 
+@Getter
 @ToString
 @EqualsAndHashCode
 public class Password {
@@ -27,4 +29,7 @@ public class Password {
         }
     }
 
+    public static Password of(String password) {
+        return new Password(password);
+    }
 }
