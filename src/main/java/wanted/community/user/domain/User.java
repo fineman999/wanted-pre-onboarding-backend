@@ -2,7 +2,6 @@ package wanted.community.user.domain;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 
