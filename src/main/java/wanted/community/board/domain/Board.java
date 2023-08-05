@@ -3,29 +3,32 @@ package wanted.community.board.domain;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import wanted.community.user.domain.User;
 
+@Getter
 @EqualsAndHashCode
 public class Board {
     private final Long id;
     private final String title;
     private final String content;
-    private final Long userId;
+    private final User writer;
 
     @Builder
-    public Board(Long id, String title, String content, Long userId) {
+    public Board(Long id, String title, String content, User writer) {
         this.id = id;
         this.title = title;
         this.content = content;
-        this.userId = userId;
+        this.writer = writer;
     }
 
 
-    public static Board create(BoardCreateDto boardCreateDto, Long userId) {
+    public static Board create(BoardCreateDto boardCreateDto, User user) {
         checkValid(boardCreateDto);
         return Board.builder()
                 .title(boardCreateDto.getTitle())
                 .content(boardCreateDto.getContent())
-                .userId(userId)
+                .writer(user)
                 .build();
     }
 
@@ -44,4 +47,5 @@ public class Board {
             throw new IllegalArgumentException("내용이 비어있습니다.");
         }
     }
+
 }

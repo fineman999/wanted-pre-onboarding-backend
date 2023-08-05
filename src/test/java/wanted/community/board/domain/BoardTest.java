@@ -1,13 +1,31 @@
 package wanted.community.board.domain;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import wanted.community.user.application.port.PasswordEncoderHolder;
+import wanted.community.user.domain.Email;
+import wanted.community.user.domain.Password;
+import wanted.community.user.domain.Role;
+import wanted.community.user.domain.User;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BoardTest {
+    private PasswordEncoderHolder passwordEncoderHolder;
 
+    private User writer;
+    @BeforeEach
+    void setUp() {
+        passwordEncoderHolder = password -> "encodedPassword";
+        writer = User.builder()
+                .id(1L)
+                .email(Email.create("test@gmail.com"))
+                .password(Password.create("password", passwordEncoderHolder))
+                .role(Role.USER)
+                .build();
+    }
 
     @Test
     @DisplayName("게시판 생성")
@@ -17,15 +35,15 @@ class BoardTest {
                 .title("title")
                 .content("content")
                 .build();
-        Long userId = 1L;
 
 
-        Board board = Board.create(boardCreateDto, userId);
+
+        Board board = Board.create(boardCreateDto, writer);
 
         assertThat(board).isEqualTo(Board.builder()
                 .title("title")
                 .content("content")
-                .userId(1L)
+                .writer(writer)
                 .build());
     }
 
@@ -37,10 +55,9 @@ class BoardTest {
                 .title("")
                 .content("content")
                 .build();
-        Long userId = 1L;
 
         Assertions.assertThatThrownBy(
-                () -> Board.create(boardCreateDto, userId)
+                () -> Board.create(boardCreateDto, writer)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("제목이 비어있습니다.");
     }
@@ -53,10 +70,9 @@ class BoardTest {
                 .title("title")
                 .content("")
                 .build();
-        Long userId = 1L;
 
         Assertions.assertThatThrownBy(
-                () -> Board.create(boardCreateDto, userId)
+                () -> Board.create(boardCreateDto, writer)
         ).isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("내용이 비어있습니다.");
     }
