@@ -7,7 +7,7 @@ import wanted.community.user.domain.Password;
 import wanted.community.user.domain.User;
 
 @Getter
-@Entity(name = "user")
+@Entity(name = "users")
 public class UserEntity {
 
     @Id

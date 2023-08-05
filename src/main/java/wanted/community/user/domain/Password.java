@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.ToString;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 
-import java.util.Objects;
-
 @Getter
 @ToString
 @EqualsAndHashCode
