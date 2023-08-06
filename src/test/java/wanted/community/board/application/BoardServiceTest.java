@@ -1,6 +1,7 @@
 package wanted.community.board.application;
 
 import jakarta.persistence.EntityManager;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -81,5 +82,17 @@ class BoardServiceTest {
                 .content("update")
                 .writer(writer)
                 .build());
+    }
+
+    @Test
+    @DisplayName("게시판 삭제")
+    void delete() {
+
+        boardService.deleteById(3L);
+
+        Assertions.assertThatThrownBy(
+                () -> boardService.getById(3L)
+        ).isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("해당하는 게시글이 없습니다.");
     }
 }

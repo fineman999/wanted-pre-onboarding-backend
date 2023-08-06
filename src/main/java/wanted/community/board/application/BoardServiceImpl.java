@@ -48,6 +48,12 @@ public class BoardServiceImpl implements BoardService {
         return board;
     }
 
+    @Override
+    public void deleteById(Long id) {
+        boardRepository.getById(id);
+        boardRepository.deleteById(id);
+    }
+
     private PageRequest getPage(BoardPageDto boardPageDto) {
         return PageRequest.of(boardPageDto.getPage(), boardPageDto.getSize());
     }

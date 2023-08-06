@@ -10,4 +10,6 @@ public interface BoardRepository {
     Page<Board> findAll(PageRequest pageRequest);
 
     Board getById(Long id);
+
+    void deleteById(Long id);
 }

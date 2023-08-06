@@ -14,4 +14,6 @@ public interface BoardService {
     Board getById(Long id);
 
     Board updateById(Long id, BoardUpdateDto boardUpdateDto);
+
+    void deleteById(Long id);
 }

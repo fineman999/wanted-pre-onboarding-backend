@@ -14,8 +14,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.CommunityApplication;
+import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
 import wanted.community.board.infrastructure.entity.BoardEntity;
 import wanted.community.board.presentation.request.BoardCreateRequest;
@@ -28,6 +30,7 @@ import wanted.security.domain.CustomUserDetails;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -53,7 +56,7 @@ class BoardControllerTest {
     private String token;
 
     @Autowired
-    private EntityManager entityManager;
+    private BoardRepository boardRepository;
 
     private User writer;
 
@@ -115,8 +118,8 @@ class BoardControllerTest {
                 .content("testContent")
                 .writer(writer)
                 .build();
-        entityManager.persist(BoardEntity.from(board));
-        entityManager.flush();
+
+        boardRepository.save(board);
 
         BoardUpdateRequest boardUpdateRequest = BoardUpdateRequest.builder()
                 .id(1L)
@@ -131,5 +134,22 @@ class BoardControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.response.title").value("updateTitle"))
                 .andExpect(jsonPath("$.response.content").value("updateContent"));
+    }
+
+    @Test
+    @DisplayName("사용자 토큰을 사용해서 게시글을 삭제하는 테스트")
+    void deleteById() throws Exception {
+        Board board = Board.builder()
+                .title("textTitle")
+                .content("testContent")
+                .writer(writer)
+                .build();
+        board = boardRepository.save(board);
+        String id = String.valueOf(board.getId());
+
+        mockMvc.perform(delete("/api/v1/boards/" + id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
+                .andExpect(status().isNoContent());
     }
 }

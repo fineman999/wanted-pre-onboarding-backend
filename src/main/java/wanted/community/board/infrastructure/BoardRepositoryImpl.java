@@ -32,6 +32,11 @@ public class BoardRepositoryImpl implements BoardRepository {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
     }
 
+    @Override
+    public void deleteById(Long id) {
+        boardJpaRepository.deleteById(id);
+    }
+
     private Optional<Board> findById(Long id) {
         return boardJpaRepository.findById(id).map(BoardEntity::toModel);
     }
