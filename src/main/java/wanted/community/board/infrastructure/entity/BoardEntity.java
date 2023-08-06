@@ -2,12 +2,17 @@ package wanted.community.board.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+import wanted.common.infrastructure.BaseTimeEntity;
 import wanted.community.board.domain.Board;
 import wanted.community.user.infrastructure.entity.UserEntity;
 
 @Getter
 @Entity(name = "board")
-public class BoardEntity {
+@SQLDelete(sql = "update plan set delete_at=now() where id=?")
+@Where(clause = "delete_at is null")
+public class BoardEntity extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,6 +42,8 @@ public class BoardEntity {
                 .title(title)
                 .content(content)
                 .writer(writer.toModel())
+                .createdAt(getCreateAt())
+                .updatedAt(getUpdateAt())
                 .build();
     }
 }

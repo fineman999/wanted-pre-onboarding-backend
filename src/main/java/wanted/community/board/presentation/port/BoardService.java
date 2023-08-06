@@ -1,8 +1,14 @@
 package wanted.community.board.presentation.port;
 
+import org.springframework.data.domain.Page;
 import wanted.community.board.domain.Board;
-import wanted.community.board.domain.BoardCreateDto;
+import wanted.community.board.application.port.BoardCreateDto;
+import wanted.community.board.presentation.request.BoardPageRequest;
 
 public interface BoardService {
     Board save(BoardCreateDto boardCreateDto, String email);
+
+    Page<Board> findAll(BoardPageRequest boardPageRequest);
+
+    Board getById(Long id);
 }

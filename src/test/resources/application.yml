@@ -25,3 +25,10 @@ security:
     secret-key: Lku1GIzGvgA9rlZVP+hK4CgHQigzdMsfenAW6C1dNq3ahgOvm2T+JiXjAZ8mPK2k
     expiration-access: 300000
   permit-url: /api/v1/boards/**
+
+
+sql:
+  script:
+    delete:
+      board: DELETE FROM board
+      users: DELETE FROM users
