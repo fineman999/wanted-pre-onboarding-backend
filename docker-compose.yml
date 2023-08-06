@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  my-spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"  # 호스트 포트와 컨테이너 포트 매핑
+    networks:
+      - my-network  # 사용할 네트워크 이름
+
+networks:
+  my-network:  # 사용할 네트워크 정의

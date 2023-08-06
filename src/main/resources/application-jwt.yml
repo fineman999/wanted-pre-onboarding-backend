@@ -1,5 +1,5 @@
 
 jwt:
-  secret-key: ${security.jwt.secret-key}
-  expiration-access: ${security.jwt.expiration-access}
-  permit-url: ${security.permit-url}
+  secret-key: ${JWT_SECRET_KEY}
+  expiration-access: ${security.jwt.expiration.access}
+  permit-url: ${security.permit.url}
