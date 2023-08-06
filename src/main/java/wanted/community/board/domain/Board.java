@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import wanted.community.board.application.port.BoardCreateDto;
-import wanted.community.board.presentation.request.BoardUpdateDto;
+import wanted.community.board.application.port.BoardUpdateDto;
 import wanted.community.user.domain.User;
 
 import java.time.LocalDateTime;

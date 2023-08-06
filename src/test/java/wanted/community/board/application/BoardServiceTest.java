@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.domain.Board;
-import wanted.community.board.presentation.request.BoardUpdateDto;
+import wanted.community.board.application.port.BoardUpdateDto;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;

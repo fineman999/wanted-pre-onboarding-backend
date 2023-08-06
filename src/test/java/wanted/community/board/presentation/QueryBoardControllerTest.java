@@ -110,7 +110,7 @@ class QueryBoardControllerTest {
         mockMvc.perform(get("/api/v1/boards/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.response.id").value(1))
+                .andExpect(jsonPath("$.response.id").value(id))
                 .andExpect(jsonPath("$.response.title").value(board.getTitle()))
                 .andExpect(jsonPath("$.response.content").value(board.getContent()))
                 .andExpect(jsonPath("$.response.writerEmail").value(user.getEmail()))

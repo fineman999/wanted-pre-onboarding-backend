@@ -1,11 +1,14 @@
-package wanted.community.board.presentation.request;
+package wanted.community.board.application.port;
 
 import lombok.Builder;
 import lombok.Getter;
+import wanted.community.board.presentation.request.BoardUpdateRequest;
 
 @Getter
 public class BoardUpdateDto {
+
     private final String title;
+
     private final String content;
 
     @Builder

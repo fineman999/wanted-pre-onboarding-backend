@@ -10,7 +10,7 @@ import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.board.application.port.BoardPageDto;
-import wanted.community.board.presentation.request.BoardUpdateDto;
+import wanted.community.board.application.port.BoardUpdateDto;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
 

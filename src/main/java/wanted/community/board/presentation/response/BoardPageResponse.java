@@ -1,5 +1,6 @@
 package wanted.community.board.presentation.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Getter;
 import wanted.community.board.domain.Board;
@@ -7,8 +8,14 @@ import wanted.community.board.domain.Board;
 
 @Getter
 public class BoardPageResponse {
+
+    @Schema(description = "게시글 번호", example = "1")
     private final Long id;
+
+    @Schema(description = "제목", example = "제목입니다.")
     private final String title;
+
+    @Schema(description = "작성자 이메일", example = "test@naver.com")
     private final String writerEmail;
 
     @Builder
