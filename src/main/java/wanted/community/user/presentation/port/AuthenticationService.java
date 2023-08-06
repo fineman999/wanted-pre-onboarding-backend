@@ -1,4 +1,4 @@
-package wanted.community.user.presentation;
+package wanted.community.user.presentation.port;
 
 import wanted.community.user.presentation.request.LoginRequest;
 

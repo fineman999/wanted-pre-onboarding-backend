@@ -35,21 +35,34 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.findAll(getPage(boardPageDto));
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Board getById(Long id) {
         return boardRepository.getById(id);
     }
 
+    @Transactional
     @Override
-    public Board updateById(Long id, BoardUpdateDto boardUpdateDto) {
+    public Board updateById(Long id, BoardUpdateDto boardUpdateDto, String email) {
+        User user = userRepository.getByEmail(email);
         Board board = boardRepository.getById(id);
+
+        checkEquals(user, board);
         board = board.update(boardUpdateDto);
-        board = boardRepository.save(board);
+        int update = boardRepository.update(board);
+
+        checkSuccess(update);
         return board;
     }
 
+    @Transactional
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Long id, String email) {
+        User user = userRepository.getByEmail(email);
+        Board board = boardRepository.getById(id);
+        if (!user.compare(board.getWriter())) {
+            throw new IllegalArgumentException("해당 게시글을 삭제할 권한이 없습니다.");
+        }
         boardRepository.getById(id);
         boardRepository.deleteById(id);
     }
@@ -57,4 +70,17 @@ public class BoardServiceImpl implements BoardService {
     private PageRequest getPage(BoardPageDto boardPageDto) {
         return PageRequest.of(boardPageDto.getPage(), boardPageDto.getSize());
     }
+
+    private static void checkSuccess(int update) {
+        if (update != 1) {
+            throw new IllegalArgumentException("해당 게시글이 수정되지 않았습니다. 다시 시도해주세요.");
+        }
+    }
+
+    private void checkEquals(User user, Board board) {
+        if (!user.compare(board.getWriter())) {
+            throw new IllegalArgumentException("해당 게시글을 수정할 권한이 없습니다.");
+        }
+    }
+
 }

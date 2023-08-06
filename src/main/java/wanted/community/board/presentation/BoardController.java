@@ -17,7 +17,7 @@ import wanted.community.board.presentation.request.BoardCreateRequest;
 import wanted.community.board.application.port.BoardUpdateDto;
 import wanted.community.board.presentation.request.BoardUpdateRequest;
 import wanted.community.board.presentation.response.BoardResponse;
-import wanted.community.user.presentation.AuthenticationService;
+import wanted.community.user.presentation.port.AuthenticationService;
 
 import static wanted.common.utils.ApiUtils.success;
 
@@ -50,7 +50,8 @@ public class BoardController {
     public ResponseEntity<ApiResult<BoardResponse>> update(
             @Valid @RequestBody BoardUpdateRequest boardUpdateRequest
     ) {
-        Board board = boardService.updateById(boardUpdateRequest.getId(), BoardUpdateDto.of(boardUpdateRequest));
+        String email = authenticationService.getEmail();
+        Board board = boardService.updateById(boardUpdateRequest.getId(), BoardUpdateDto.of(boardUpdateRequest), email);
         return ResponseEntity.ok(success(BoardResponse.from(board)));
     }
 
@@ -60,7 +61,8 @@ public class BoardController {
     public ResponseEntity<ApiResult<Void>> delete(
             @PathVariable Long id
     ) {
-        boardService.deleteById(id);
+        String email = authenticationService.getEmail();
+        boardService.deleteById(id, email);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(success(null));
     }
 

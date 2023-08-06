@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import wanted.community.user.domain.Role;
+import wanted.community.user.domain.Status;
 import wanted.security.jwt.JwtAuthorizationFilter;
 import wanted.security.jwt.JwtConfig;
 
@@ -35,7 +35,7 @@ public class SecurityConfig {
                 auth ->
                         auth
                             .requestMatchers(HttpMethod.GET, jwtConfig.getPermitUrlByUser()).permitAll()
-                            .requestMatchers(jwtConfig.getPermitUrlByUser()).hasAuthority(String.valueOf(Role.USER))
+                            .requestMatchers(jwtConfig.getPermitUrlByUser()).hasAuthority(String.valueOf(Status.USER))
                             .anyRequest().permitAll()
         );
         http.sessionManagement(

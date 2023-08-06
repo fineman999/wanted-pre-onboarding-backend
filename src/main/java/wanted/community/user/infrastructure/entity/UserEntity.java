@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;
-import wanted.community.user.domain.Role;
+import wanted.community.user.domain.Status;
 import wanted.community.user.domain.User;
 
 @Getter
@@ -25,14 +25,14 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Status status;
 
     public static UserEntity from(User user) {
         UserEntity userEntity = new UserEntity();
         userEntity.id = user.getId();
         userEntity.email = user.getEmail();
         userEntity.password = user.getPassword();
-        userEntity.role = user.getRole();
+        userEntity.status = user.getStatus();
         return userEntity;
     }
 
@@ -41,7 +41,7 @@ public class UserEntity {
                 .id(id)
                 .email(Email.of(email))
                 .password(Password.of(password))
-                .role(role)
+                .status(status)
                 .build();
     }
 }

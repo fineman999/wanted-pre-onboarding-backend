@@ -37,7 +37,12 @@ public class BoardRepositoryImpl implements BoardRepository {
         boardJpaRepository.deleteById(id);
     }
 
+    @Override
+    public int update(Board board) {
+        return boardJpaRepository.update(BoardEntity.from(board));
+    }
+
     private Optional<Board> findById(Long id) {
-        return boardJpaRepository.findById(id).map(BoardEntity::toModel);
+        return boardJpaRepository.findByIdFetchJoin(id).map(BoardEntity::toModel);
     }
 }

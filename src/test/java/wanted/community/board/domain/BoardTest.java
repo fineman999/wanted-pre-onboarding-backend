@@ -8,7 +8,7 @@ import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;
-import wanted.community.user.domain.Role;
+import wanted.community.user.domain.Status;
 import wanted.community.user.domain.User;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -24,7 +24,7 @@ class BoardTest {
                 .id(1L)
                 .email(Email.create("test@gmail.com"))
                 .password(Password.create("password", passwordEncoderHolder))
-                .role(Role.USER)
+                .status(Status.USER)
                 .build();
     }
 

@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.user.application.port.JwtGenerator;
-import wanted.community.user.presentation.AuthenticationService;
+import wanted.community.user.presentation.port.AuthenticationService;
 import wanted.community.user.presentation.request.LoginRequest;
 import wanted.security.domain.CustomUserDetails;
 

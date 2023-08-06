@@ -49,4 +49,16 @@ public class FakeBoardRepository implements BoardRepository {
     public void deleteById(Long id) {
         data.removeIf(item -> item.getId().equals(id));
     }
+
+    @Override
+    public int update(Board board) {
+        data.stream()
+                .filter(item -> item.getId().equals(board.getId()))
+                .map(item -> board)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 게시글이 없습니다."));
+        return 1;
+
+
+    }
 }
