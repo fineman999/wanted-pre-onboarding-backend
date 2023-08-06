@@ -1,7 +1,6 @@
 package wanted.community.board.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,12 +13,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.CommunityApplication;
 import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
-import wanted.community.board.infrastructure.entity.BoardEntity;
 import wanted.community.board.presentation.request.BoardCreateRequest;
 import wanted.community.board.presentation.request.BoardUpdateRequest;
 import wanted.community.user.application.port.JwtGenerator;
@@ -28,9 +25,7 @@ import wanted.community.user.domain.User;
 import wanted.community.user.presentation.port.UserService;
 import wanted.security.domain.CustomUserDetails;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

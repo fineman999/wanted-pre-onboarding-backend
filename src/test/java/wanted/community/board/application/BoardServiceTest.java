@@ -1,21 +1,17 @@
 package wanted.community.board.application;
 
-import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import wanted.community.board.domain.Board;
 import wanted.community.board.application.port.BoardCreateDto;
-import wanted.community.board.infrastructure.entity.BoardEntity;
+import wanted.community.board.domain.Board;
 import wanted.community.board.presentation.request.BoardUpdateDto;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;
 import wanted.community.user.domain.Role;
 import wanted.community.user.domain.User;
-import wanted.community.user.infrastructure.entity.UserEntity;
 import wanted.community.user.mock.FakeUserRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
