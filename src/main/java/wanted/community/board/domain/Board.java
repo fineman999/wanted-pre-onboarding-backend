@@ -64,6 +64,8 @@ public class Board {
                 .title(boardUpdateDto.getTitle() == null ? this.title : boardUpdateDto.getTitle())
                 .content(boardUpdateDto.getContent() == null ? this.content : boardUpdateDto.getContent())
                 .writer(this.writer)
+                .createdAt(this.createdAt)
+                .updatedAt(this.updatedAt)
                 .build();
     }
 }

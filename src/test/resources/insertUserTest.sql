@@ -1,1 +1,1 @@
-insert into users(id, email, password, role) values(1, 'admin@localhost', 'admin', 'USER');
+insert into users(id, email, password, status) values(1, 'admin@localhost', 'admin', 'USER');

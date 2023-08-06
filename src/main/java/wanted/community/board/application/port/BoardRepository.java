@@ -12,4 +12,6 @@ public interface BoardRepository {
     Board getById(Long id);
 
     void deleteById(Long id);
+
+    int update(Board board);
 }

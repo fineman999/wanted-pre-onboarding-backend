@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wanted.community.user.application.port.UserCreateDto;
 import wanted.community.user.domain.User;
+import wanted.community.user.presentation.port.AuthenticationService;
 import wanted.community.user.presentation.port.UserService;
 import wanted.community.user.presentation.request.LoginRequest;
 import wanted.community.user.presentation.request.UserCreateRequest;

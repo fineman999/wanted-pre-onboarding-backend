@@ -13,7 +13,8 @@ public interface BoardService {
 
     Board getById(Long id);
 
-    Board updateById(Long id, BoardUpdateDto boardUpdateDto);
 
-    void deleteById(Long id);
+    Board updateById(Long id, BoardUpdateDto boardUpdateDto, String email);
+
+    void deleteById(Long id, String email);
 }

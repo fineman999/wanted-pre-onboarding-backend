@@ -1,5 +1,5 @@
 package wanted.community.user.domain;
 
-public enum Role {
+public enum Status {
     USER
 }

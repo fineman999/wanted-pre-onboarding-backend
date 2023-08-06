@@ -10,7 +10,7 @@ import wanted.community.board.application.port.BoardUpdateDto;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;
-import wanted.community.user.domain.Role;
+import wanted.community.user.domain.Status;
 import wanted.community.user.domain.User;
 import wanted.community.user.mock.FakeUserRepository;
 
@@ -29,7 +29,7 @@ class BoardServiceTest {
                 .id(1L)
                 .email(Email.of("test@test.com"))
                 .password(Password.of("123456789"))
-                .role(Role.USER)
+                .status(Status.USER)
                 .build();
         userRepository.save(writer);
         Board board = Board.builder()
@@ -65,12 +65,14 @@ class BoardServiceTest {
     @DisplayName("게시판 수정")
     void update() {
 
+        String email = "test@test.com";
+
         BoardUpdateDto boardUpdateDto = BoardUpdateDto.builder()
                 .title("update")
                 .content("update")
                 .build();
 
-        Board updatedBoard = boardService.updateById(3L, boardUpdateDto);
+        Board updatedBoard = boardService.updateById(3L, boardUpdateDto, email);
 
         assertThat(updatedBoard).isEqualTo(Board.builder()
                 .id(3L)
@@ -83,8 +85,9 @@ class BoardServiceTest {
     @Test
     @DisplayName("게시판 삭제")
     void delete() {
+        String email = "test@test.com";
 
-        boardService.deleteById(3L);
+        boardService.deleteById(3L, email);
 
         Assertions.assertThatThrownBy(
                 () -> boardService.getById(3L)
