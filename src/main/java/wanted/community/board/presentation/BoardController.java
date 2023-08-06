@@ -47,5 +47,13 @@ public class BoardController {
         return ResponseEntity.ok(success(BoardResponse.from(board)));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResult<Void>> delete(
+            @PathVariable Long id
+    ) {
+        boardService.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(success(null));
+    }
+
 
 }

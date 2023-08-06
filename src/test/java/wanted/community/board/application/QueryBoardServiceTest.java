@@ -61,10 +61,7 @@ public class QueryBoardServiceTest {
 
         Page<Board> boards = boardService.findAll(boardPageDto);
 
-        assertAll(
-                () -> assertThat(boards.getSize()).isEqualTo(size)
-        );
-
+        assertThat(boards.getSize()).isEqualTo(size);
     }
 
     @SqlGroup({

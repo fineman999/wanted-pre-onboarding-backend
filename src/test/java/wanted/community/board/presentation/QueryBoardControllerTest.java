@@ -1,7 +1,6 @@
 package wanted.community.board.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import wanted.community.CommunityApplication;
 import wanted.community.board.domain.Board;
 import wanted.community.board.infrastructure.entity.BoardEntity;
+import wanted.community.board.infrastructure.port.BoardJpaRepository;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
 
@@ -50,7 +50,7 @@ class QueryBoardControllerTest {
     private UserRepository userRepository;
 
     @Autowired
-    private EntityManager em;
+    private BoardJpaRepository boardJpaRepository;
 
     @AfterEach
     void afterEach() {
@@ -103,12 +103,11 @@ class QueryBoardControllerTest {
                 .content("content")
                 .writer(user)
                 .build();
-        BoardEntity boardEntity = BoardEntity.from(board);
-        em.persist(boardEntity);
-        em.flush();
+        BoardEntity boardEntity = boardJpaRepository.save(BoardEntity.from(board));
+        String id = String.valueOf(boardEntity.getId());
 
 
-        mockMvc.perform(get("/api/v1/boards/{id}", 1)
+        mockMvc.perform(get("/api/v1/boards/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.response.id").value(1))

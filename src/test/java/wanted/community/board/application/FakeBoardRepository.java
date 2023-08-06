@@ -44,4 +44,9 @@ public class FakeBoardRepository implements BoardRepository {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 게시글이 없습니다."));
     }
+
+    @Override
+    public void deleteById(Long id) {
+        data.removeIf(item -> item.getId().equals(id));
+    }
 }

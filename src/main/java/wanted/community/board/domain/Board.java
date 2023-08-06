@@ -22,17 +22,15 @@ public class Board {
 
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
-    private final LocalDateTime deletedAt;
 
     @Builder
-    public Board(Long id, String title, String content, User writer, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public Board(Long id, String title, String content, User writer, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
     }
 
     public static Board create(BoardCreateDto boardCreateDto, User user) {
