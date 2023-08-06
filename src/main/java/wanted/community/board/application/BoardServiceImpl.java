@@ -5,15 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
-import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.board.presentation.request.BoardPageRequest;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
