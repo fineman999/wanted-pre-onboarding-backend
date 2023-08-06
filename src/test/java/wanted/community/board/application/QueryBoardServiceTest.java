@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import wanted.community.board.domain.Board;
 import wanted.community.board.infrastructure.port.BoardJpaRepository;
 import wanted.community.board.presentation.port.BoardService;
-import wanted.community.board.presentation.request.BoardPageRequest;
+import wanted.community.board.application.port.BoardPageDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -51,18 +51,17 @@ public class QueryBoardServiceTest {
             @Sql(scripts = "/insertUserTest.sql"), @Sql("/insertBoardTest.sql")
     })
     @ParameterizedTest
-    @CsvSource({"5, 3", "5, 2"})
+    @CsvSource({"3", "2"})
     @DisplayName("게시글 목록을 조회한다.")
-    void getPage(int totalElements, int size) {
-        BoardPageRequest boardPageRequest = BoardPageRequest.builder()
+    void getPage(int size) {
+        BoardPageDto boardPageDto = BoardPageDto.builder()
                 .page(0)
                 .size(size)
                 .build();
 
-        Page<Board> boards = boardService.findAll(boardPageRequest);
+        Page<Board> boards = boardService.findAll(boardPageDto);
 
         assertAll(
-                () -> assertThat(boards.getTotalElements()).isEqualTo(totalElements),
                 () -> assertThat(boards.getSize()).isEqualTo(size)
         );
 

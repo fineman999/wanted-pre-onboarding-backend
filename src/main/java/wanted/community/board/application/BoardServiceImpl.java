@@ -9,7 +9,7 @@ import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
 import wanted.community.board.presentation.port.BoardService;
-import wanted.community.board.presentation.request.BoardPageRequest;
+import wanted.community.board.application.port.BoardPageDto;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
 
@@ -30,8 +30,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Board> findAll(BoardPageRequest boardPageRequest) {
-        return boardRepository.findAll(getPage(boardPageRequest));
+    public Page<Board> findAll(BoardPageDto boardPageDto) {
+        return boardRepository.findAll(getPage(boardPageDto));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
         return boardRepository.getById(id);
     }
 
-    private PageRequest getPage(BoardPageRequest boardPageRequest) {
-        return PageRequest.of(boardPageRequest.getPage(), boardPageRequest.getSize());
+    private PageRequest getPage(BoardPageDto boardPageDto) {
+        return PageRequest.of(boardPageDto.getPage(), boardPageDto.getSize());
     }
 }

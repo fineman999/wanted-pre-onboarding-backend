@@ -80,4 +80,21 @@ class BoardControllerTest {
                 .andExpect(jsonPath("$.response.content").value("testContent"))
                 .andExpect(jsonPath("$.response.writerEmail").value("test@gmail.com"));
     }
+
+    @Test
+    @DisplayName("사용자 토큰을 사용해서 게시글을 생성하는 테스트 - 값을 입력하지 않았을 때")
+    void login_not_value() throws Exception {
+        BoardCreateRequest board = BoardCreateRequest.builder()
+                .content("123")
+                .build();
+
+        mockMvc.perform(post("/api/v1/boards")
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(board)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.error.message").value("제목을 입력해주세요."));
+    }
+
+
 }

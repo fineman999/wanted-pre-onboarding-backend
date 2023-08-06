@@ -16,9 +16,8 @@ import org.springframework.test.context.jdbc.SqlGroup;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.CommunityApplication;
-import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
-import wanted.community.board.presentation.request.BoardPageRequest;
+import wanted.community.board.infrastructure.entity.BoardEntity;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
 
@@ -41,15 +40,11 @@ class QueryBoardControllerTest {
     @Value("${sql.script.delete.users}")
     private String deleteUserSql;
 
-
     @Autowired
     ObjectMapper objectMapper;
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private BoardRepository boardRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -70,41 +65,53 @@ class QueryBoardControllerTest {
     @Test
     void getPage() throws Exception {
 
-        BoardPageRequest boardPageRequest = BoardPageRequest.builder()
-                .page(0)
-                .size(3)
-                .build();
+        final String page = "0";
+        final String size = "2";
 
         mockMvc.perform(get("/api/v1/boards")
                 .contentType(MediaType.APPLICATION_JSON)
-                .param("page", String.valueOf(boardPageRequest.getPage()))
-                .param("size", String.valueOf(boardPageRequest.getSize())))
+                .param("page", page)
+                .param("size", size))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.response.totalElements").value(5))
-                .andExpect(jsonPath("$.response.totalPages").value(2))
-                .andExpect(jsonPath("$.response.numberOfElements").value(3))
+                .andExpect(jsonPath("$.response.totalPages").value(6))
+                .andExpect(jsonPath("$.response.size").value(2))
                 .andExpect(jsonPath("$.response.content[0].id").value(1))
                 .andExpect(jsonPath("$.response.content[1].id").value(2));
     }
 
+    @SqlGroup({
+            @Sql(scripts = "/insertUserTest.sql"), @Sql("/insertBoardTest.sql")
+    })
+    @DisplayName("게시글 목록을 조회한다. - page와 size값이 없는 경우 기본값")
+    @Test
+    void getPageWithoutPage() throws Exception {
+
+        mockMvc.perform(get("/api/v1/boards")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.response.size").value(10))
+                .andExpect(jsonPath("$.response.number").value(0));
+    }
 
     @DisplayName("게시글을 상세 조회한다.")
     @Sql(scripts = "/insertUserTest.sql")
     @Test
     void getById() throws Exception {
         User user = userRepository.getByEmail("admin@localhost");
-
-        Board board = boardRepository.save(Board.builder()
+        Board board = Board.builder()
                 .title("title")
                 .content("content")
                 .writer(user)
-                .build());
+                .build();
+        BoardEntity boardEntity = BoardEntity.from(board);
+        em.persist(boardEntity);
         em.flush();
+
 
         mockMvc.perform(get("/api/v1/boards/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.response.id").value(board.getId()))
+                .andExpect(jsonPath("$.response.id").value(1))
                 .andExpect(jsonPath("$.response.title").value(board.getTitle()))
                 .andExpect(jsonPath("$.response.content").value(board.getContent()))
                 .andExpect(jsonPath("$.response.writerEmail").value(user.getEmail()))

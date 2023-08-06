@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import wanted.common.utils.ApiUtils.ApiResult;
 import wanted.community.board.presentation.port.BoardService;
-import wanted.community.board.presentation.request.BoardPageRequest;
+import wanted.community.board.application.port.BoardPageDto;
 import wanted.community.board.presentation.response.BoardPageResponse;
 import wanted.community.board.presentation.response.BoardResponse;
 
@@ -21,11 +21,12 @@ public class QueryBoardController {
 
     @GetMapping
     public ResponseEntity<ApiResult<Page<BoardPageResponse>>> findAll(
-            @ModelAttribute BoardPageRequest boardPageRequest
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = "10") int size
     ) {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(success(boardService.findAll(boardPageRequest)
-                .map(BoardPageResponse::from)));
+                .body(success(boardService.findAll(BoardPageDto.of(page, size))
+                        .map(BoardPageResponse::from)));
     }
 
     @GetMapping("/{id}")
