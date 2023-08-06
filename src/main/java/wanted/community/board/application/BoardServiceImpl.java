@@ -10,6 +10,7 @@ import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.board.application.port.BoardPageDto;
+import wanted.community.board.presentation.request.BoardUpdateDto;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;
 
@@ -37,6 +38,14 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board getById(Long id) {
         return boardRepository.getById(id);
+    }
+
+    @Override
+    public Board updateById(Long id, BoardUpdateDto boardUpdateDto) {
+        Board board = boardRepository.getById(id);
+        board = board.update(boardUpdateDto);
+        board = boardRepository.save(board);
+        return board;
     }
 
     private PageRequest getPage(BoardPageDto boardPageDto) {

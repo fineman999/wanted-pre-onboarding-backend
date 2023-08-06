@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import wanted.community.board.application.port.BoardCreateDto;
+import wanted.community.board.presentation.request.BoardUpdateDto;
 import wanted.community.user.domain.User;
 
 import java.time.LocalDateTime;
@@ -57,5 +58,14 @@ public class Board {
         if (content == null || content.isEmpty() || content.isBlank()) {
             throw new IllegalArgumentException("내용이 비어있습니다.");
         }
+    }
+
+    public Board update(BoardUpdateDto boardUpdateDto) {
+        return Board.builder()
+                .id(this.id)
+                .title(boardUpdateDto.getTitle() == null ? this.title : boardUpdateDto.getTitle())
+                .content(boardUpdateDto.getContent() == null ? this.content : boardUpdateDto.getContent())
+                .writer(this.writer)
+                .build();
     }
 }

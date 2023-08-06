@@ -39,6 +39,9 @@ public class FakeBoardRepository implements BoardRepository {
 
     @Override
     public Board getById(Long id) {
-        return null;
+        return data.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 게시글이 없습니다."));
     }
 }
