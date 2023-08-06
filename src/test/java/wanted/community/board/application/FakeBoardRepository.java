@@ -1,5 +1,7 @@
 package wanted.community.board.application;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
 import wanted.community.user.domain.User;
@@ -29,5 +31,15 @@ public class FakeBoardRepository implements BoardRepository {
         data.removeIf(item -> item.getId().equals(board.getId()));
         data.add(board);
         return board;
+    }
+
+    @Override
+    public Page<Board> findAll(PageRequest pageRequest) {
+        return null;
+    }
+
+    @Override
+    public Board getById(Long id) {
+        return null;
     }
 }
