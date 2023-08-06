@@ -68,6 +68,8 @@ $ docker-compose up -d
 
 ### API 명세
 
+[주소](http://13.125.156.78/swagger-ui/index.html#/)
+
 ---
 
 ### 아키텍처 구조
