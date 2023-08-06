@@ -1,6 +1,7 @@
 package wanted.community.board.presentation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.CommunityApplication;
+import wanted.community.board.domain.Board;
+import wanted.community.board.infrastructure.entity.BoardEntity;
 import wanted.community.board.presentation.request.BoardCreateRequest;
+import wanted.community.board.presentation.request.BoardUpdateRequest;
 import wanted.community.user.application.port.JwtGenerator;
 import wanted.community.user.application.port.UserCreateDto;
 import wanted.community.user.domain.User;
@@ -23,6 +27,7 @@ import wanted.community.user.presentation.port.UserService;
 import wanted.security.domain.CustomUserDetails;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -47,16 +52,21 @@ class BoardControllerTest {
 
     private String token;
 
+    @Autowired
+    private EntityManager entityManager;
+
+    private User writer;
+
     @BeforeEach
     void setUp() {
 
-        User user = userService.save(UserCreateDto.builder()
+        writer = userService.save(UserCreateDto.builder()
                 .email("test@gmail.com")
                 .password("123456789")
                 .build());
 
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                user.getEmail(),
+                writer.getEmail(),
                 "123456789"
         ));
         CustomUserDetails UserToken = (CustomUserDetails) authenticate.getPrincipal();
@@ -97,4 +107,29 @@ class BoardControllerTest {
     }
 
 
+    @Test
+    @DisplayName("사용자 토큰을 사용해서 게시글을 수정하는 테스트")
+    void update() throws Exception {
+        Board board = Board.builder()
+                .title("textTitle")
+                .content("testContent")
+                .writer(writer)
+                .build();
+        entityManager.persist(BoardEntity.from(board));
+        entityManager.flush();
+
+        BoardUpdateRequest boardUpdateRequest = BoardUpdateRequest.builder()
+                .id(1L)
+                .title("updateTitle")
+                .content("updateContent")
+                .build();
+
+        mockMvc.perform(put("/api/v1/boards")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                        .content(objectMapper.writeValueAsString(boardUpdateRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.response.title").value("updateTitle"))
+                .andExpect(jsonPath("$.response.content").value("updateContent"));
+    }
 }

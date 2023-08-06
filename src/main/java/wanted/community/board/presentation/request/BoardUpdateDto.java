@@ -13,4 +13,11 @@ public class BoardUpdateDto {
         this.title = title;
         this.content = content;
     }
+
+    public static BoardUpdateDto of(BoardUpdateRequest boardUpdateRequest) {
+        return BoardUpdateDto.builder()
+                .title(boardUpdateRequest.getTitle())
+                .content(boardUpdateRequest.getContent())
+                .build();
+    }
 }

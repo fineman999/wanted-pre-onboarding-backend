@@ -11,6 +11,8 @@ import wanted.community.board.domain.Board;
 import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.board.presentation.request.BoardCreateRequest;
+import wanted.community.board.presentation.request.BoardUpdateDto;
+import wanted.community.board.presentation.request.BoardUpdateRequest;
 import wanted.community.board.presentation.response.BoardResponse;
 import wanted.community.user.presentation.AuthenticationService;
 
@@ -31,11 +33,19 @@ public class BoardController {
             @Valid @RequestBody BoardCreateRequest boardCreateRequest
     ) {
         String email = authenticationService.getEmail();
-        log.info("email: {}", email);
         Board board = boardService.save(BoardCreateDto.of(boardCreateRequest), email);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(success(BoardResponse.from(board)));
     }
+
+    @PutMapping
+    public ResponseEntity<ApiResult<BoardResponse>> update(
+            @Valid @RequestBody BoardUpdateRequest boardUpdateRequest
+    ) {
+        Board board = boardService.updateById(boardUpdateRequest.getId(), BoardUpdateDto.of(boardUpdateRequest));
+        return ResponseEntity.ok(success(BoardResponse.from(board)));
+    }
+
 
 }
