@@ -40,9 +40,6 @@ public class Board {
                 .title(boardCreateDto.getTitle())
                 .content(boardCreateDto.getContent())
                 .writer(user)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .deletedAt(null)
                 .build();
     }
 
