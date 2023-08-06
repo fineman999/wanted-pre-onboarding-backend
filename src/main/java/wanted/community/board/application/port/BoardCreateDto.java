@@ -1,4 +1,4 @@
-package wanted.community.board.domain;
+package wanted.community.board.application.port;
 
 
 import lombok.Builder;

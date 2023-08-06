@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.user.application.port.PasswordEncoderHolder;
 import wanted.community.user.domain.Email;
 import wanted.community.user.domain.Password;

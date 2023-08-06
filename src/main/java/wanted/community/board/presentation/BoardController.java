@@ -4,20 +4,15 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import wanted.common.utils.ApiUtils;
 import wanted.common.utils.ApiUtils.ApiResult;
 import wanted.community.board.domain.Board;
-import wanted.community.board.domain.BoardCreateDto;
+import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.board.presentation.request.BoardCreateRequest;
 import wanted.community.board.presentation.response.BoardResponse;
 import wanted.community.user.presentation.AuthenticationService;
-
-import java.util.List;
 
 import static wanted.common.utils.ApiUtils.success;
 

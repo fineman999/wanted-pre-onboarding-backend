@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
-import wanted.community.board.domain.BoardCreateDto;
+import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.user.application.port.UserRepository;
 import wanted.community.user.domain.User;

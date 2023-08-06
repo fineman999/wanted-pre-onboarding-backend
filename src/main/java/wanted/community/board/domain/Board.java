@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.user.domain.User;
 
 @Getter
