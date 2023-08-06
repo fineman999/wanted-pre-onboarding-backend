@@ -8,6 +8,8 @@ import lombok.ToString;
 import wanted.community.board.application.port.BoardCreateDto;
 import wanted.community.user.domain.User;
 
+import java.time.LocalDateTime;
+
 @Getter
 @ToString
 @EqualsAndHashCode
@@ -17,14 +19,20 @@ public class Board {
     private final String content;
     private final User writer;
 
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
+    private final LocalDateTime deletedAt;
+
     @Builder
-    public Board(Long id, String title, String content, User writer) {
+    public Board(Long id, String title, String content, User writer, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writer = writer;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
-
 
     public static Board create(BoardCreateDto boardCreateDto, User user) {
         checkValid(boardCreateDto);
@@ -32,6 +40,9 @@ public class Board {
                 .title(boardCreateDto.getTitle())
                 .content(boardCreateDto.getContent())
                 .writer(user)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .deletedAt(null)
                 .build();
     }
 
