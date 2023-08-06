@@ -42,6 +42,8 @@ public class BoardEntity extends BaseTimeEntity {
                 .title(title)
                 .content(content)
                 .writer(writer.toModel())
+                .createdAt(getCreateAt())
+                .updatedAt(getUpdateAt())
                 .build();
     }
 }

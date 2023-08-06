@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import wanted.community.board.domain.Board;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class BoardResponse {
     private final Long id;
@@ -11,12 +13,17 @@ public class BoardResponse {
     private final String content;
     private final String writerEmail;
 
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
+
     @Builder
-    public BoardResponse(Long id, String title, String content, String writerEmail) {
+    public BoardResponse(Long id, String title, String content, String writerEmail, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.writerEmail = writerEmail;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public static BoardResponse from(Board board) {
@@ -25,6 +32,8 @@ public class BoardResponse {
                 .title(board.getTitle())
                 .content(board.getContent())
                 .writerEmail(board.getWriter().getEmail())
+                .createdAt(board.getCreatedAt())
+                .updatedAt(board.getUpdatedAt())
                 .build();
     }
 }
