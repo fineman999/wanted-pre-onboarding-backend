@@ -4,7 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import wanted.community.board.application.port.BoardRepository;
 import wanted.community.board.domain.Board;
-import wanted.community.user.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

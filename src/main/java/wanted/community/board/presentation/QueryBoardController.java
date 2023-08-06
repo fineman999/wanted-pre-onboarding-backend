@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import wanted.common.utils.ApiUtils;
 import wanted.common.utils.ApiUtils.ApiResult;
 import wanted.community.board.presentation.port.BoardService;
 import wanted.community.board.presentation.request.BoardPageRequest;
