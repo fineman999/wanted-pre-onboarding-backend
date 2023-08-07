@@ -42,7 +42,6 @@
 - 실행 - 리눅스 환경
 
 ```shell
-$ ./gradlew build
 $ docker-compose up -d
 ```
 
