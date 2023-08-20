@@ -82,7 +82,7 @@ $ docker-compose up -d
 
 ### API 명세
 
-[주소](http://13.125.156.78/swagger-ui/index.html#/)
+[주소 - 기간 종료](http://13.125.156.78/swagger-ui/index.html#/)
 
 ---
 
